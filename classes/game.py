@@ -29,19 +29,13 @@ class Game:
           self.make_move()
 
     def get_column_choice(self):
-        # while True:       #fancier, probably better way
-            # try:
-            #     x = int(input("Enter a column choice: "))
-            #     break
-            # except ValueError:
-            #     print("Oops! You entered an invalid type. Try again\n")
         print("What column what you like to place your piece?\n")
         column_choice = input("Valid choices are columns 0 through 5: ")
         try:
             column_choice = int(column_choice)
             return column_choice if 0 <= column_choice <= 5 else self.get_column_choice()
         except ValueError:
-            print("{} is not a valid column choice. Please enter a value between 0 and 5".format(column_choice))
+            # print("{} is not a valid column choice. Please enter a value between 0 and 5".format(column_choice))
             return self.get_column_choice()
 
     def place_checker(self, column):
@@ -49,11 +43,10 @@ class Game:
 
     def check_for_win(self):
         return False
-        #pass
 
     def toggle_players(self):
         self.current_player = 'P2' if self.current_player == 'P1' else 'P1'
-        # print(self.current_player+", you're up!")
 
+    # helper method, not used in production
     def whose_turn(self):
         return self.current_player
