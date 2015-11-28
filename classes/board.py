@@ -4,7 +4,7 @@ class Board:
     RED = ' R '
     BLUE = ' B '
 
-    def __init__(self, cols = 7, rows = 6, required_to_win = 4):
+    def __init__(self, cols = 6, rows = 7, required_to_win = 4):
         self.board = []
         self.cols = cols
         self.rows = rows
@@ -15,10 +15,5 @@ class Board:
         b = '\n'
         for row in self.board:
             b += ''.join(row) + '\n'
+        b += " 0  1  2  3  4  5  6  \n"
         return b
-
-    def place_checker(self, column):
-        pass
-        # if the column is full, return false
-
-        # if the column is not full, place the checker in the lowest possible space.
