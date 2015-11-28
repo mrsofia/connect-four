@@ -6,7 +6,7 @@ class Game:
     P2 = 'P2'
 
     def __init__(self, board):
-        self.current_player = 'P1'
+        self.current_player = self.P1
         self.board = board
         print("Welcome to connect four! ")
         self.make_move()
@@ -15,9 +15,6 @@ class Game:
         #returns true if the current player has won the game
         print("{}\n{}, you're up! ".format(self.board, self.current_player))
         column_choice = self.get_column_choice()
-
-        if type(column_choice) != int:
-            raise ValueError("custom error: column_choice returned by get_column_choice was not an int!! could be caused by get_column_choice recursion")
 
         valid_column = self.place_checker(column=column_choice)
         if not valid_column:
