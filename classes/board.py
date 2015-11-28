@@ -5,7 +5,6 @@ class Board:
     BLUE = ' B '
 
     def __init__(self, cols = 6, rows = 7, required_to_win = 4):
-        self.board = []
         self.cols = cols
         self.rows = rows
         self.win = required_to_win
