@@ -1,14 +1,12 @@
-# connect_four.py
-
-## Play connect four on the command line... by yourself!
+# Play connect four on the command line... by yourself!
 
 Bored while waiting for a build? Bored in general? Play connect four in the terminal!
 
-All your friends will either think you're cool, or insane.
+All your friends will either think you're cool, or insane. Either way, you win!
 
 ### How to Play
 
-First sure you have Python 3 in your PATH - I developed this using Python version 3.5, but any version of Python 3 ought to work. If not, feel free to submit an issue and let me know!
+First make sure you have Python 3 in your PATH - I developed this using Python version 3.5, but any version of Python 3 ought to work. If not, feel free to submit an issue and let me know!
 
 To run, first clone the repo.
 
