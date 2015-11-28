@@ -1,3 +1,5 @@
+from sys import exit
+
 class Game:
 
     P1 = 'P1'
@@ -11,42 +13,78 @@ class Game:
 
     def make_move(self):
         #returns true if the current player has won the game
-        # print(self.board+'\n'+self.current_player+", you're up!")
-        print(self.board)
-        print(self.current_player+", you're up! ")
+        print("{}\n{}, you're up! ".format(self.board, self.current_player))
         column_choice = self.get_column_choice()
-        if type(column_choice) != int:
-            raise ValueError("custom error: column_choice returned by get_column_choice was not an int!! could be caused by recursion in origin method")
-        print("your choice was...")
-        print(column_choice)
-        self.place_checker(column=column_choice)
-        # win = True if self.check_for_win() else False
 
-        # haxx for now
-        win = True if column_choice=="exit" else False
+        if type(column_choice) != int:
+            raise ValueError("custom error: column_choice returned by get_column_choice was not an int!! could be caused by get_column_choice recursion")
+
+        valid_column = self.place_checker(column=column_choice)
+        if not valid_column:
+            print("That column is full. Please enter a non-full column. ")
+            self.make_move()
+            return False
+        win = True if self.check_for_win() else False
         if not win:
           self.toggle_players()
           self.make_move()
 
     def get_column_choice(self):
         print("What column what you like to place your piece?\n")
-        column_choice = input("Valid choices are columns 0 through 5: ")
+        column_choice = input("Valid choices are columns 0 through 6: ")
         try:
+            if column_choice == "exit": exit()
             column_choice = int(column_choice)
-            return column_choice if 0 <= column_choice <= 5 else self.get_column_choice()
+            return column_choice if 0 <= column_choice <= 6 else self.get_column_choice()
         except ValueError:
             # print("{} is not a valid column choice. Please enter a value between 0 and 5".format(column_choice))
             return self.get_column_choice()
 
+    # how to resolve issue of calling board.place_checker without current_player?
     def place_checker(self, column):
-        print("you're putting the checker in column {}".format(column))
+        print("You've selected column {}".format(column))
+        #1. force player to re-input if column is full
+
+        if(self.board.board[0][column] != ' . '):
+            # column is full, force player to re-choose
+            return False
+        lowest_available_row = self.find_lowest_row_in_column(column=column)
+        try:
+            self.board.board[lowest_available_row][column] = self.players_piece()
+            return True
+        except IndexError:
+            print("Array out of bounds error! Exiting...")
+            exit()
+
+    def find_lowest_row_in_column(self, column):
+        column_as_list = []
+        for row in self.board.board:
+            column_as_list.append(row[column])
+
+        try:
+            first_red = column_as_list.index(self.board.RED) - 1
+        except ValueError:
+            first_red = None
+        try:
+            first_blue = column_as_list.index(self.board.BLUE) - 1
+        except ValueError:
+            first_blue = None
+
+        if first_blue == None and first_red == None:
+            return 5
+        elif first_blue == None or first_red == None:
+            return first_blue if first_blue != None else first_red
+        else:
+            return min(first_blue, first_red)
 
     def check_for_win(self):
         return False
+        # check for left-right
+        # check for up-down
+        # check for diagonal
 
     def toggle_players(self):
         self.current_player = 'P2' if self.current_player == 'P1' else 'P1'
 
-    # helper method, not used in production
-    def whose_turn(self):
-        return self.current_player
+    def players_piece(self):
+        return self.board.RED if self.current_player == self.P1 else self.board.BLUE
