@@ -1,5 +1,9 @@
 from classes import board, game, exceptions
 
-b = board.Board()
+play_again = "yes"
 
-g = game.Game(board=b)
+# game loop
+while play_again == "yes":
+    b = board.Board()
+    g = game.Game(board=b)
+    play_again = input("Would you like to play again? Enter yes to replay: ").lower().strip()

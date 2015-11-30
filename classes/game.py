@@ -23,8 +23,11 @@ class Game:
             return False
         win = True if self.check_for_win() else False
         if not win:
-          self.toggle_players()
-          self.make_move()
+            self.toggle_players()
+            self.make_move()
+        if win:
+            print("congratulations, you win!")
+
 
     def get_column_choice(self):
         print("What column what you like to place your piece?\n")
@@ -75,7 +78,8 @@ class Game:
             return min(first_blue, first_red)
 
     def check_for_win(self):
-        return False
+        return True
+        # return False
         # check for left-right
         # check for up-down
         # check for diagonal
