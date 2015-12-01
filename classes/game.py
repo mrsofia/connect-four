@@ -78,11 +78,51 @@ class Game:
             return min(first_blue, first_red)
 
     def check_for_win(self):
-        return True
-        # return False
-        # check for left-right
-        # check for up-down
-        # check for diagonal
+        win = False
+        # c1 et al represent column numbers
+        row = 5
+        cols = [0, 1, 2, 3]
+        while not win:
+            try:
+                seq = []
+                # print("cols is {}".format(cols))
+                # print("row is {}".format(row))
+                # print(self.board.board)
+                # print("self.board.board[5][5] is {}".format(self.board.board[5][5]))
+                # print("cols before for loop is {}".format(cols))
+                for i in range(len(cols)):
+                    # print("i in this iter is {}".format(i))
+                    # get current 4 values this iteration into seq list
+                    # print("cols[i] in this iter is {}".format(cols[i]))
+                    seq.append(self.board.board[row][cols[i]])
+                    # print("row is {}".format(row))
+                    # print("cols[i] is {}".format(cols[i]))
+                    # print("self.board.board[rows][cols[i]] is {}".format(self.board.board[row][cols[i]]))
+                # for checker in seq:
+                print("seq at beginning of check is now {}".format(seq))
+                # print('check for win called')
+                if self.check_equal(seq):
+                    print("self.check_equal came back true")
+                    return True
+                else:
+                    for i in range(len(cols)):
+                        cols[i] += 1
+                    # print("cols changed to {} in else block of try".format(cols))
+                    # print("cols is {}".format(cols))
+                    continue
+            except IndexError as inst:
+                # print(type(inst))
+                # print(inst.args)
+                # print(inst)
+                print('IndexError, it broke')
+                break
+            # win = True
+            # break
+        if (win == False): print('reached end of check_for_win function')
+        return win
+
+    def check_equal(self, lst):
+        return lst[1:] == lst[:-1] if lst[0] != self.board.NONE else False
 
     def toggle_players(self):
         self.current_player = 'P2' if self.current_player == 'P1' else 'P1'
