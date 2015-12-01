@@ -15,7 +15,6 @@ class Game:
         self.make_move()
 
     def make_move(self):
-        #returns true if the current player has won the game
         print("{}\n{}, you're up! ".format(self.board, self.current_player))
         column_choice = self.get_column_choice()
 
@@ -39,13 +38,10 @@ class Game:
             column_choice = int(column_choice)
             return column_choice if 0 <= column_choice <= 6 else self.get_column_choice()
         except ValueError:
-            # print("{} is not a valid column choice. Please enter a value between 0 and 5".format(column_choice))
             return self.get_column_choice()
 
-    # how to resolve issue of calling board.place_checker without current_player?
     def place_checker(self, column):
         print("You've selected column {}".format(column))
-        #1. force player to re-input if column is full
 
         if(self.board.board[0][column] != ' . '):
             # column is full, force player to re-choose
@@ -55,6 +51,7 @@ class Game:
             self.board.board[lowest_available_row][column] = self.players_piece()
             return True
         except IndexError:
+            # this should never happen
             print("Array out of bounds error! Exiting...")
             exit()
 
