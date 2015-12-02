@@ -5,12 +5,21 @@ class WinChecker:
         self.board = board
 
     def check_for_win(self):
-        return self.check_win_horizontally()
+        results = []
+        results.append(self.check_win_horizontally())
+        results.append(self.check_win_vertically())
+        results.append(self.check_win_diagonally())
+        try:
+            win = results.index(True)
+            # if the above statement does not generate a ValueError, then a win exists
+            return True
+        except ValueError:
+            return False
 
     def check_win_horizontally(self):
         win = False
 
-        for i in range(6):
+        for i in range(self.board.rows):
             row = i
             cols = [0, 1, 2, 3]
             while not win:
@@ -34,7 +43,9 @@ class WinChecker:
         return win
 
     def check_win_vertically(self):
-        pass
+        win = True
+
+        return win
 
     def check_win_diagonally(self):
         pass
