@@ -1,8 +1,8 @@
 class Board:
 
     NONE = ' . '
-    RED = ' R '
-    BLUE = ' B '
+    RED = ' A '
+    BLUE = ' O '
 
     def __init__(self, cols = 6, rows = 7, required_to_win = 4):
         self.cols = cols
