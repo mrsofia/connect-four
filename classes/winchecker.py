@@ -70,7 +70,32 @@ class WinChecker:
         return win
 
     def check_win_diagonally(self):
-        pass
+        win = False
+
+        for i in range(self.board.cols):
+            col = i
+            cols = [col, col+1, col+2, col+3]
+            rows = [0, 1, 2, 3]
+            while not win:
+                try:
+                    # seq will represent the current 4 squares being examined
+                    seq = []
+                    for i in range(len(rows)):
+                        # append current 4 squares to seq list
+                        seq.append(self.board.board[rows[i]][cols[i]])
+                    if self.check_equal(seq):
+                        return True
+                    else:
+                        # increment each value in rows, this is how the diagonal
+                        # win checking progresses from top to bottom
+                        for i in range(len(rows)):
+                            rows[i] += 1
+                        continue
+                except IndexError:
+                    # we've hit the end of this col, break the loop and move to the next col
+                    break
+
+        return win
 
     def check_equal(self, lst):
         return lst[1:] == lst[:-1] if lst[0] != self.board.NONE else False
