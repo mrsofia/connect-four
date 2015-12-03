@@ -43,7 +43,29 @@ class WinChecker:
         return win
 
     def check_win_vertically(self):
-        win = True
+        win = False
+
+        for i in range(self.board.cols):
+            col = i
+            rows = [0, 1, 2, 3]
+            while not win:
+                try:
+                    # seq will represent the current 4 squares being examined
+                    seq = []
+                    for i in range(len(rows)):
+                        # append current 4 squares to seq list
+                        seq.append(self.board.board[rows[i]][col])
+                    if self.check_equal(seq):
+                        return True
+                    else:
+                        # increment each value in rows, this is how the horizontal
+                        # win checking progresses from top to bottom
+                        for i in range(len(rows)):
+                            rows[i] += 1
+                        continue
+                except IndexError:
+                    # we've hit the end of this col, break the loop and move to the next col
+                    break
 
         return win
 
