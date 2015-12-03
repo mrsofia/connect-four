@@ -28,7 +28,8 @@ class Game:
             self.toggle_players()
             self.make_move()
         if win:
-            print("congratulations, you win!")
+            print(self.board)
+            print("\ncongratulations {}, you win!\n".format(self.current_player))
 
     def get_column_choice(self):
         print("What column what you like to place your piece?\n")
