@@ -81,7 +81,7 @@ class Game:
         return self.winchecker.check_for_win()
 
     def toggle_players(self):
-        self.current_player = 'P2' if self.current_player == 'P1' else 'P1'
+        self.current_player = self.P2 if self.current_player == self.P1 else self.P1
 
     def players_piece(self):
         return self.board.RED if self.current_player == self.P1 else self.board.BLUE
