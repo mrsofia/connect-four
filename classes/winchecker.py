@@ -10,7 +10,7 @@ class WinChecker:
         results.append(self.check_win_vertically())
         results.append(self.check_win_diagonally())
         try:
-            win = results.index(True)
+            results.index(True)
             # if the above statement does not generate a ValueError, then a win exists
             return True
         except ValueError:
